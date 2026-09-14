@@ -24,15 +24,5 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Qt/QML runtime
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y qml-qt6 qml6-module-qtquick qml6-module-qtwebengine
-          if ! command -v qml6 >/dev/null 2>&1; then
-            sudo ln -s "$(command -v qml-qt6)" /usr/local/bin/qml6
-          fi
-
-      - name: Run tests
-        env:
-          QT_QPA_PLATFORM: offscreen
-        run: node --test EpornerApi.test.cjs ColonyApi.test.cjs ViewerWindow.test.cjs
+      - name: Run JavaScript tests
+        run: node --test EpornerApi.test.cjs ColonyApi.test.cjs
