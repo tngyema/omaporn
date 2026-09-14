@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.tngyema.omaporn",
+  "name": "Omaporn",
+  "version": "0.1.1",
+  "author": "tngyema",
+  "description": "Age-gated combined Eporner and AdultColony search with embedded player",
+  "license": "MIT",
+  "homepage": "https://github.com/tngyema/omaporn",
+  "repository": "https://github.com/tngyema/omaporn",
+  "kinds": [
+    "panel",
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "panel": "Panel.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Omaporn",
+    "description": "Open combined adult video search",
+    "category": "Utilities",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
