@@ -4,13 +4,14 @@ var MAX_PAGE = 1000000
 var REQUEST_TIMEOUT_MS = 10000
 
 var ORDERS = [
+  "top-daily",
+  "top-weekly",
+  "top-monthly",
+  "most-popular",
   "latest",
   "longest",
   "shortest",
-  "top-rated",
-  "most-popular",
-  "top-weekly",
-  "top-monthly"
+  "top-rated"
 ]
 
 // Keep searches and displayed metadata limited to adult content.

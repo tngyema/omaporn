@@ -89,6 +89,16 @@ test("buildSearchUrl falls back to safe defaults", () => {
   assert.equal(url.searchParams.get("order"), "latest")
 })
 
+test("supports daily, weekly, monthly, and all-time popularity orders", () => {
+  assert.deepEqual(api.ORDERS.slice(0, 4), [
+    "top-daily", "top-weekly", "top-monthly", "most-popular"
+  ])
+  for (const order of api.ORDERS.slice(0, 4)) {
+    const url = new URL(api.buildSearchUrl("all", 1, order))
+    assert.equal(url.searchParams.get("order"), order)
+  }
+})
+
 test("normalizeVideo rejects unapproved embed and page urls", () => {
   const base = { id: "x1", title: "Adult example" }
   assert.equal(api.normalizeVideo(null), null)

@@ -44,7 +44,9 @@ the search field with `Search terms must describe adults only`.
 ## Sources
 
 - **Eporner** (default) — official Eporner JSON API, full pagination and
-  result ordering, embedded `/embed/` player. Ordinary searches request
+  result ordering, embedded `/embed/` player. The order button includes
+  most viewed today, this week, this month, and all time, plus latest and
+  other sort modes. Ordinary searches request
   straight-only, high-quality results; the Gay category uses Eporner's strict
   Gay filter.
 - **Colony** — a self-hosted AdultColony-API instance
@@ -60,8 +62,8 @@ the search field with `Search terms must describe adults only`.
   Then switch the panel to Colony, pick a site chip, and set the base URL
   (default `http://127.0.0.1:3000`). Colony search responses carry no
   totals, so pagination is open-ended (`Page N`, Next while results keep
-  coming). Colony results open the site watch page in the viewer instead
-  of an embed URL.
+  coming). Pornhub results use the canonical `pornhub.com` domain. Colony
+  results open the site watch page in the viewer instead of an embed URL.
 
 - **Both** — fires Eporner and Colony (selected site) in parallel and merges
   both feeds into one grid, Eporner rows first, duplicates removed by URL.

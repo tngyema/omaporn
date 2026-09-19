@@ -19,7 +19,7 @@ Item {
   property bool ageConfirmed: false
   property string pendingQuery: "all"
   property string searchQuery: "all"
-  property string selectedOrder: "latest"
+  property string selectedOrder: "top-daily"
   property string selectedSource: "eporner"
   property string selectedSite: "eporner"
   property string colonyBase: Colony.DEFAULT_BASE_URL
@@ -151,7 +151,7 @@ Item {
     function onDone(result) {
       if (!root.opened || serial !== root.requestSerial) return
       root.searching = false
-      root.videos = result.videos
+      root.videos = root.rankVideos(result.videos)
       root.totalPages = result.pagination.totalPages
       root.totalCount = result.pagination.totalCount
       root.colonyHasMore = result.hasMore === true
@@ -189,10 +189,10 @@ Item {
           root.totalCount = 0
         }
         root.colonyHasMore = coResult ? coResult.hasMore === true : false
-        root.videos = Colony.mergeSources(
+        root.videos = root.rankVideos(Colony.mergeSources(
           epResult ? epResult.videos : [],
           coResult ? coResult.videos : [],
-          colonyLabel)
+          colonyLabel))
         if (failures.length === 2) {
           root.videos = []
           root.error = failures.join("   ·   ")
@@ -246,6 +246,23 @@ Item {
     if (root.ageConfirmed) root.startSearch(root.searchQuery, 1)
   }
 
+  function popularityOrder() {
+    return root.selectedOrder === "top-daily" || root.selectedOrder === "top-weekly"
+      || root.selectedOrder === "top-monthly" || root.selectedOrder === "most-popular"
+  }
+
+  function rankVideos(rows) {
+    var values = Array.isArray(rows) ? rows.slice() : []
+    if (!root.popularityOrder()) return values
+    values.sort(function(a, b) {
+      var viewsA = Math.max(0, Number(a && a.views) || 0)
+      var viewsB = Math.max(0, Number(b && b.views) || 0)
+      if (viewsA !== viewsB) return viewsB - viewsA
+      return String(a && a.title || "").localeCompare(String(b && b.title || ""))
+    })
+    return values
+  }
+
   function cycleSource() {
     if (root.selectedSource === "eporner") root.selectedSource = "colony"
     else if (root.selectedSource === "colony") root.selectedSource = "both"
@@ -262,12 +279,13 @@ Item {
   function orderLabel() {
     var labels = {
       "latest": "Latest",
+      "top-daily": "Most viewed today",
+      "top-weekly": "Most viewed this week",
+      "top-monthly": "Most viewed this month",
+      "most-popular": "Most viewed all time",
       "longest": "Longest",
       "shortest": "Shortest",
-      "top-rated": "Top rated",
-      "most-popular": "Most popular",
-      "top-weekly": "Top weekly",
-      "top-monthly": "Top monthly"
+      "top-rated": "Top rated"
     }
     return labels[root.selectedOrder] || root.selectedOrder
   }

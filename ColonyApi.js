@@ -20,7 +20,7 @@ var BLOCKED_CONTENT = /\b(?:underage|minor|child|children|kid|kids|preteen|pre-t
 // ever loaded, and only those watch-page links survive normalization.
 var SITES = [
   { id: "eporner",    label: "Eporner",     domain: "eporner.com" },
-  { id: "pornhub",    label: "Pornhub",     domain: "pornhub.org" },
+  { id: "pornhub",    label: "Pornhub",     domain: "pornhub.com" },
   { id: "xhamster",   label: "xHamster",    domain: "xhamster.com" },
   { id: "spankbang",  label: "SpankBang",   domain: "spankbang.party" },
   { id: "xnxx",       label: "XNXX",        domain: "xnxx.com" },

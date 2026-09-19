@@ -26,7 +26,7 @@ test("supports the full source list and upstream source domains", () => {
     "hentaifox", "hentaicity", "xasiat", "javhdtoday", "javtsunami",
     "javgiga", "missav"
   ])
-  assert.equal(api.isSitePageUrl(api.siteById("pornhub"), "https://pornhub.org/view/1"), true)
+  assert.equal(api.isSitePageUrl(api.siteById("pornhub"), "https://www.pornhub.com/view/1"), true)
   assert.equal(api.isSitePageUrl(api.siteById("spankbang"), "https://spankbang.party/1"), true)
   assert.equal(api.isSitePageUrl(api.siteById("javhdtoday"), "https://javhd.today/video/1"), true)
   assert.equal(api.isSitePageUrl(api.siteById("missav"), "https://missav.ws/en/video/1"), true)
@@ -64,7 +64,7 @@ test("normalizeResponse maps colony rows and reports open-ended pagination", () 
   const result = api.normalizeResponse({
     success: true,
     data: [{
-       link: "https://www.pornhub.org/view_video.php?viewkey=abc123",
+      link: "https://www.pornhub.com/view_video.php?viewkey=abc123",
       id: "abc123",
       title: "Example title",
       image: "https://cdn.example.com/thumb.jpg",
@@ -83,8 +83,8 @@ test("normalizeResponse maps colony rows and reports open-ended pagination", () 
     rating: 92,
     durationSeconds: 1262,
     duration: "21:02",
-     pageUrl: "https://www.pornhub.org/view_video.php?viewkey=abc123",
-     embedUrl: "https://www.pornhub.org/view_video.php?viewkey=abc123",
+    pageUrl: "https://www.pornhub.com/view_video.php?viewkey=abc123",
+    embedUrl: "https://www.pornhub.com/view_video.php?viewkey=abc123",
     thumbnailUrl: "https://cdn.example.com/thumb.jpg"
   })
   assert.equal(result.pagination.page, 2)
@@ -110,9 +110,9 @@ test("normalizeResponse drops off-domain links and blocked content", () => {
     success: true,
     data: [
       { link: "https://evil.com/watch/1", id: "1", title: "Adult example" },
-       { link: "http://www.pornhub.org/watch/2", id: "2", title: "Adult example" },
-       { link: "https://www.pornhub.org/watch/3", id: "3", title: "Underage example" },
-       { link: "https://www.pornhub.org/watch/4", id: "4", title: "Adult example" }
+      { link: "http://www.pornhub.com/watch/2", id: "2", title: "Adult example" },
+      { link: "https://www.pornhub.com/watch/3", id: "3", title: "Underage example" },
+      { link: "https://www.pornhub.com/watch/4", id: "4", title: "Adult example" }
     ]
   }, "pornhub", 1)
 
@@ -133,7 +133,7 @@ test("mergeSources concatenates eporner-first and dedupes by url", () => {
   ]
   const co = [
     { id: "b2", pageUrl: "https://www.eporner.com/embed/b/", embedUrl: "https://www.eporner.com/embed/b/", title: "B dup" },
-    { id: "c", pageUrl: "https://www.pornhub.org/watch/c", embedUrl: "https://www.pornhub.org/watch/c", title: "C" }
+    { id: "c", pageUrl: "https://www.pornhub.com/watch/c", embedUrl: "https://www.pornhub.com/watch/c", title: "C" }
   ]
   const merged = api.mergeSources(ep, co, "Pornhub")
 
