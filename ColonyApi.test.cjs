@@ -27,6 +27,7 @@ test("supports the full source list and upstream source domains", () => {
     "javgiga", "missav"
   ])
   assert.equal(api.isSitePageUrl(api.siteById("pornhub"), "https://www.pornhub.com/view/1"), true)
+  assert.equal(api.isSitePageUrl(api.siteById("pornhub"), "https://pornhub.org/view/1"), true)
   assert.equal(api.isSitePageUrl(api.siteById("spankbang"), "https://spankbang.party/1"), true)
   assert.equal(api.isSitePageUrl(api.siteById("javhdtoday"), "https://javhd.today/video/1"), true)
   assert.equal(api.isSitePageUrl(api.siteById("missav"), "https://missav.ws/en/video/1"), true)
@@ -64,7 +65,7 @@ test("normalizeResponse maps colony rows and reports open-ended pagination", () 
   const result = api.normalizeResponse({
     success: true,
     data: [{
-      link: "https://www.pornhub.com/view_video.php?viewkey=abc123",
+      link: "https://pornhub.org/view_video.php?viewkey=abc123",
       id: "abc123",
       title: "Example title",
       image: "https://cdn.example.com/thumb.jpg",
@@ -83,8 +84,8 @@ test("normalizeResponse maps colony rows and reports open-ended pagination", () 
     rating: 92,
     durationSeconds: 1262,
     duration: "21:02",
-    pageUrl: "https://www.pornhub.com/view_video.php?viewkey=abc123",
-    embedUrl: "https://www.pornhub.com/view_video.php?viewkey=abc123",
+    pageUrl: "https://pornhub.org/view_video.php?viewkey=abc123",
+    embedUrl: "https://pornhub.org/view_video.php?viewkey=abc123",
     thumbnailUrl: "https://cdn.example.com/thumb.jpg"
   })
   assert.equal(result.pagination.page, 2)

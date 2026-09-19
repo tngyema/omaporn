@@ -20,7 +20,7 @@ var BLOCKED_CONTENT = /\b(?:underage|minor|child|children|kid|kids|preteen|pre-t
 // ever loaded, and only those watch-page links survive normalization.
 var SITES = [
   { id: "eporner",    label: "Eporner",     domain: "eporner.com" },
-  { id: "pornhub",    label: "Pornhub",     domain: "pornhub.com" },
+  { id: "pornhub",    label: "Pornhub",     domain: "pornhub.com", aliases: ["pornhub.org"] },
   { id: "xhamster",   label: "xHamster",    domain: "xhamster.com" },
   { id: "spankbang",  label: "SpankBang",   domain: "spankbang.party" },
   { id: "xnxx",       label: "XNXX",        domain: "xnxx.com" },
@@ -68,8 +68,12 @@ function isSitePageUrl(site, value) {
     var withoutProto = url.replace(/^https:\/\//i, "")
     host = withoutProto.split("/")[0].toLowerCase()
   } catch (e) { return false }
-  var domain = site.domain.toLowerCase()
-  return host === domain || host.slice(-(domain.length + 1)) === "." + domain
+  var domains = [site.domain].concat(Array.isArray(site.aliases) ? site.aliases : [])
+  for (var i = 0; i < domains.length; i++) {
+    var domain = String(domains[i]).toLowerCase()
+    if (host === domain || host.slice(-(domain.length + 1)) === "." + domain) return true
+  }
+  return false
 }
 
 function resolveSiteUrl(site, value) {
