@@ -62,7 +62,8 @@ the search field with `Search terms must describe adults only`.
   Then switch the panel to Colony, pick a site chip, and set the base URL
   (default `http://127.0.0.1:3000`). Colony search responses carry no
   totals, so pagination is open-ended (`Page N`, Next while results keep
-  coming). Pornhub results use the canonical `pornhub.com` domain. Colony
+  coming). Pornhub results from AdultColony may use `pornhub.org` or
+  `pornhub.com`; both adapter domains are accepted. Colony
   results open the site watch page in the viewer instead of an embed URL.
 
 - **Both** — fires Eporner and Colony (selected site) in parallel and merges
