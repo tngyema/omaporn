@@ -18,6 +18,20 @@ The install command only clones and validates the repository; it does not run
 an installer or request elevated privileges. Review this unsandboxed plugin
 before enabling it.
 
+### Bar button missing
+
+On affected Omarchy 4 releases, a previously enabled panel entry can prevent
+the `bar-widget` entry from being restored. Disable and re-enable Omaporn to
+place its button back on the right side of the bar:
+
+```sh
+omarchy plugin disable io.github.tngyema.omaporn
+omarchy plugin enable io.github.tngyema.omaporn --before omarchy.power
+```
+
+This is tracked upstream in
+[omacom/omarchy#12534](https://github.com/omacom/omarchy/issues/12534).
+
 ## Uninstall
 
 ```sh
